@@ -1,10 +1,10 @@
 from tuya_connector import TuyaOpenAPI
 
 # ========= CONFIG =========
-ACCESS_ID = "f8xcvjpuj3g3g7qwyrxy"
-ACCESS_SECRET = "9b8f29f8a7914c479f2445535f0dd69f"
+ACCESS_ID = "YOUR ACCESS_ID"
+ACCESS_SECRET = "YOUR ACCESS_SECRET"
 API_ENDPOINT = "https://openapi.tuyain.com"
-DEVICE_ID = "d7a914028f279baac4i04a"
+DEVICE_ID = "YOUR DEVICE_ID"
 # ==========================
 
 openapi = TuyaOpenAPI(API_ENDPOINT, ACCESS_ID, ACCESS_SECRET)
