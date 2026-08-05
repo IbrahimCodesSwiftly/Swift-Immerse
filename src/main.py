@@ -1,7 +1,7 @@
 from config.config import config
 from src.screen import capture_screen, get_average_color
-from src.colors import bgr_to_hsv, has_significant_change
-from src.bulb import set_color, set_power
+from src.colors import bgr_to_hsv, has_significant_change, is_white, is_black
+from src.bulb import set_color, set_power, set_white
 import time
 
 print("Starting Swift Immerse...")
@@ -25,12 +25,23 @@ try:
         current_hsv = (h, s, v)
 
         if last_hsv is None:
-            set_color(h, s, v)
+            if is_white(current_hsv):
+                set_white(v)  # Set brightness
+            elif is_black(current_hsv):
+                set_color(0, 0, 0)  # Set to black
+            else:
+                set_color(h, s, v)
             last_hsv = current_hsv
+            time.sleep(frame_interval)
             continue
 
         if has_significant_change(current_hsv, last_hsv):
-            set_color(h, s, v)
+            if is_white(current_hsv):
+                set_white(v)  # Set brightness
+            elif is_black(current_hsv):
+                set_color(0, 0, 0)  # Set to black
+            else:
+                set_color(h, s, v)
             last_hsv = current_hsv
 
         time.sleep(frame_interval)

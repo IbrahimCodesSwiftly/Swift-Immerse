@@ -8,6 +8,7 @@ API_ENDPOINT = config["tuya"]["endpoint"]
 DEVICE_ID = config["tuya"]["device_id"]
 # ==========================
 
+DEFAULT_WHITE_TEMPERATURE = 1000
 openapi = TuyaOpenAPI(API_ENDPOINT, ACCESS_ID, ACCESS_SECRET)
 
 if not openapi.connect()["success"]:
@@ -31,16 +32,6 @@ def set_power(is_on: bool):
             }
         ])
 
-#set the brightness of the device
-def set_brightness(brightness: int):
-    brightness = max(10, min(brightness, 1000)) #brightness must be between 10 and 1000
-    return send_commands([
-        {
-            "code": "bright_value_v2",
-            "value": brightness
-        }
-    ])
-
 #set the color of the device
 def set_color(h: int, s: int, v: int):
     h = max(0, min(h, 360)) #hue must be between 0 and 360, 0 is red, 120 is green, 240 is blue
@@ -58,5 +49,24 @@ def set_color(h: int, s: int, v: int):
                 "s": s,
                 "v": v
             }
+        }
+    ])
+
+#set the white light of the device
+def set_white(brightness: int, temperature: int = DEFAULT_WHITE_TEMPERATURE):
+    brightness = max(10, min(brightness, 1000)) #brightness must be between 10 and 1000
+    temperature = max(0, min(temperature, 1000)) #color temperature must be between 0 and 1000
+    return send_commands([
+        {
+            "code": "work_mode",
+            "value": "white"
+        },
+        {
+            "code": "bright_value_v2",
+            "value": brightness
+        },
+        {
+            "code": "temp_value_v2",
+            "value": temperature
         }
     ])
