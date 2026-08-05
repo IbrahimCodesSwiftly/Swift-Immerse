@@ -1,4 +1,4 @@
-from bulb import set_brightness, set_color, set_power
+from src.bulb import set_brightness, set_color, set_power
 
 bright_response = set_brightness(500)
 power_response = set_power(False)

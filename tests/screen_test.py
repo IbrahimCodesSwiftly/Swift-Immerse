@@ -1,4 +1,4 @@
-from screen import capture_screen
+from src.screen import capture_screen
 import cv2
 
 while True:

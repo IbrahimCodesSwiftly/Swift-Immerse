@@ -1,5 +1,5 @@
-from screen import capture_screen, get_average_color
-from colors import bgr_to_hsv
+from src.screen import capture_screen, get_average_color
+from src.colors import bgr_to_hsv
 
 while True:
     frame = capture_screen()

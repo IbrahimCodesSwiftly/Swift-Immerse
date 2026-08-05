@@ -1,4 +1,4 @@
-from screen import capture_screen, get_average_color
+from src.screen import capture_screen, get_average_color
 
 while True:
     frame = capture_screen()

@@ -1,6 +1,6 @@
-from screen import capture_screen, get_average_color
-from colors import bgr_to_hsv
-from bulb import set_color, set_power
+from src.screen import capture_screen, get_average_color
+from src.colors import bgr_to_hsv
+from src.bulb import set_color, set_power
 import time
 
 print("Starting Swift Immerse...")
