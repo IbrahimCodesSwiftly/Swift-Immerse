@@ -8,6 +8,8 @@ print("Starting Swift Immerse...")
 power_response = set_power(True)
 print("Power response:", power_response)
 
+last_hsv = None
+
 try:
     while True:
         frame = capture_screen()
@@ -16,7 +18,11 @@ try:
 
         h, s, v = bgr_to_hsv(average_color)
 
-        set_color(h, s, v)
+        current_hsv = (h, s, v)
+
+        if current_hsv != last_hsv:      #if the color has changed since the last frame, send a command to the bulb to change its color
+            set_color(h, s, v)
+            last_hsv = current_hsv       #check if the color has changed since the last frame to avoid sending unnecessary commands
 
         time.sleep(0.05)
 
