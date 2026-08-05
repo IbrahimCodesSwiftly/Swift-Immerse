@@ -1,3 +1,4 @@
+from config.config import config
 from src.screen import capture_screen, get_average_color
 from src.colors import bgr_to_hsv, has_significant_change
 from src.bulb import set_color, set_power
@@ -9,6 +10,9 @@ power_response = set_power(True)
 print("Power response:", power_response)
 
 last_hsv = None
+fps = config["capture"]["fps"]
+frame_interval = 1.0 / fps
+print(f"Capturing screen at {fps} FPS, frame interval: {frame_interval} seconds")
 
 try:
     while True:
@@ -29,7 +33,7 @@ try:
             set_color(h, s, v)
             last_hsv = current_hsv
 
-        time.sleep(0.05)
+        time.sleep(frame_interval)
 
 except KeyboardInterrupt:                 #press Ctrl+C to stop the program
     print("\nStopping Swift Immerse...")
