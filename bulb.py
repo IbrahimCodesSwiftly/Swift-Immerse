@@ -40,12 +40,16 @@ def set_brightness(brightness: int):
         }
     ])
 
-#set the colour of the device
-def set_colour(h: int, s: int, v: int):
+#set the color of the device
+def set_color(h: int, s: int, v: int):
     h = max(0, min(h, 360)) #hue must be between 0 and 360, 0 is red, 120 is green, 240 is blue
-    s = max(0, min(s, 1000)) #saturation must be between 0 and 1000, 0 is no colour, 1000 is full colour
+    s = max(0, min(s, 1000)) #saturation must be between 0 and 1000, 0 is no color, 1000 is full color
     v = max(0, min(v, 1000)) #value must be between 0 and 1000, 0 is off, 1000 is full brightness
     return send_commands([
+        {
+        "code": "work_mode",
+        "value": "colour"
+        },
         {
             "code": "colour_data_v2",
             "value": {
