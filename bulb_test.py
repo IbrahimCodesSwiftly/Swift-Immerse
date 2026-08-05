@@ -1,5 +1,7 @@
-from bulb import turn_on
+from bulb import set_brightness, set_colour, set_power
 
-response = turn_on()
+bright_response = set_brightness(500)
+power_response = set_power(False)
+colour_response = set_colour(0, 1000, 1000)
 
-print(response)
+print(power_response, bright_response, colour_response)
