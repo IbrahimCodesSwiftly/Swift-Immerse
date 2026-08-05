@@ -1,5 +1,5 @@
 from src.screen import capture_screen, get_average_color
-from src.colors import bgr_to_hsv
+from src.colors import bgr_to_hsv, has_significant_change
 from src.bulb import set_color, set_power
 import time
 
@@ -20,9 +20,14 @@ try:
 
         current_hsv = (h, s, v)
 
-        if current_hsv != last_hsv:      #if the color has changed since the last frame, send a command to the bulb to change its color
+        if last_hsv is None:
             set_color(h, s, v)
-            last_hsv = current_hsv       #check if the color has changed since the last frame to avoid sending unnecessary commands
+            last_hsv = current_hsv
+            continue
+
+        if has_significant_change(current_hsv, last_hsv):
+            set_color(h, s, v)
+            last_hsv = current_hsv
 
         time.sleep(0.05)
 
