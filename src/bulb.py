@@ -1,10 +1,11 @@
 from tuya_connector import TuyaOpenAPI
+from config.config import config
 
 # ========= CONFIG =========
-ACCESS_ID = "YOUR ACCESS_ID"
-ACCESS_SECRET = "YOUR ACCESS_SECRET"
-API_ENDPOINT = "https://openapi.tuyain.com"
-DEVICE_ID = "YOUR DEVICE_ID"
+ACCESS_ID = config["tuya"]["access_id"]
+ACCESS_SECRET = config["tuya"]["access_secret"]
+API_ENDPOINT = config["tuya"]["endpoint"]
+DEVICE_ID = config["tuya"]["device_id"]
 # ==========================
 
 openapi = TuyaOpenAPI(API_ENDPOINT, ACCESS_ID, ACCESS_SECRET)

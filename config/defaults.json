@@ -1,0 +1,12 @@
+{
+    "tuya": {
+        "access_id": "",
+        "access_secret": "",
+        "device_id": "",
+        "endpoint": "https://openapi.tuyain.com"
+    },
+
+    "capture": {
+        "fps": 10
+    }
+}
