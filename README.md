@@ -1,18 +1,4 @@
-## Swift Immerse v0.1
-
-### Features
-- Smart bulb control using Tuya Cloud API
-- Live screen capture
-- Average screen color detection
-- BGR to Tuya HSV conversion
-- Automatic bulb synchronization
-- Graceful shutdown
-
-### Known limitations
-- Uses Tuya Cloud (higher latency)
-- Uses average screen color only
-- No smoothing or optimization yet
-
+## Swift Immerse
 
 # Installation:
 
@@ -68,6 +54,26 @@ Open the source code and replace the Tuya credentials with your own:
 ```bash
 python -m src.main
 ```
+
+## Version History
+
+### v0.2
+
+- Configuration system using `config.json` and `defaults.json`
+- Configurable capture FPS
+- Smart color updates
+- HSV threshold detection
+- Automatic White Mode
+- Automatic Black Mode
+
+### v0.1
+
+- Initial release
+- Smart bulb control using Tuya Cloud API
+- Live screen capture
+- Average screen color detection
+- HSV conversion
+- Automatic bulb synchronization
 
 > **Note**
 > Swift Immerse currently uses the Tuya Cloud API, so your PC and smart bulb must have an active internet connection.
