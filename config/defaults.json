@@ -8,5 +8,9 @@
 
     "capture": {
         "fps": 20
+    },
+
+    "smoothing": {
+        "factor": 1
     }
 }

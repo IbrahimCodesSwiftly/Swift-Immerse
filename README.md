@@ -77,6 +77,7 @@ python -m src.main
 
 > **Note**
 > Swift Immerse currently uses the Tuya Cloud API, so your PC and smart bulb must have an active internet connection.
+> Smoothing is currently intended for future Local mode.
 
 > ⚠️ Swift Immerse is currently under active development.
 > The first stable release will be v1.0.

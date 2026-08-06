@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import mss
 
-# Capture the screen and return the frame
 def capture_screen():
+    '''Capture the screen and return the frame.'''
     with mss.mss() as sct:
         monitor = sct.monitors[1]  # Primary monitor
 
@@ -17,8 +17,8 @@ def capture_screen():
 
             return frame
 
-# Get the average color of the frame
 def get_average_color(frame):
+    '''Get the average color of the frame.'''
     average_color = frame.mean(axis=(0, 1)).astype(int)
 
     return average_color
