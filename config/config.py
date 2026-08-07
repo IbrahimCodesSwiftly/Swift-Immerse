@@ -15,9 +15,14 @@ if CONFIG_PATH.exists():
 
 # Merge defaults with user config
 for category, settings in defaults.items():
-    if category in config:
-        for key, value in settings.items():
-            if key not in config[category]:
-                config[category][key] = value
+    if isinstance(settings, dict):
+        if category not in config:
+            config[category] = {}
+
+for key, value in settings.items():
+    if key not in config[category]:
+        config[category][key] = value
+    
     else:
-        config[category] = settings.copy()
+        if category not in config:
+            config[category] = settings

@@ -21,3 +21,9 @@ config/config.json
 
 #TODO List
 TODO.md
+
+#tinytuya
+tinytuya/
+
+# Logs
+logs/*.log
