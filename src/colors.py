@@ -2,11 +2,6 @@ from config.config import config
 import cv2
 import numpy as np
 
-# #RGB Thresholds
-# R_THRESHOLD = config["rgb"]["r_threshold"]     # out of 255
-# G_THRESHOLD = config["rgb"]["g_threshold"]      # out of 255
-# B_THRESHOLD = config["rgb"]["b_threshold"]      # out of 255
-
 #HSV Thresholds
 H_THRESHOLD = config["hsv"]["h_threshold"]      # out of 360
 S_THRESHOLD = config["hsv"]["s_threshold"]     # out of 1000
@@ -33,23 +28,6 @@ def bgr_to_hsv(bgr):
     return h, s, v
 
 
-# def bgr_to_rgb(bgr):
-#     '''Convert a BGR color to RGB format.'''
-#     b, g, r = map(int, bgr)
-#     return r, g, b
-
-
-# def has_significant_rgb_change(current_rgb, target_rgb):
-#     '''Returns True if the RGB difference exceeds the thresholds, otherwise returns False'''
-#     r1, g1, b1 = current_rgb
-#     r2, g2, b2 = target_rgb
-#     r_diff = abs(r1 - r2)
-#     g_diff = abs(g1 - g2)
-#     b_diff = abs(b1 - b2)
-
-#     return r_diff >= R_THRESHOLD or g_diff >= G_THRESHOLD or b_diff >= B_THRESHOLD
-
-
 def has_significant_color_change(current_color, target_color):  
     '''Returns True if the color difference exceeds the thresholds, otherwise returns False'''
     h_diff = abs(current_color[0] - target_color[0])
@@ -65,17 +43,8 @@ def is_white(hsv):
     _, s, v = hsv
     return s <= WHITE_SATURATION_THRESHOLD and v >= WHITE_VALUE_THRESHOLD
 
-# def is_white_rgb(rgb):
-#     '''Returns True if the RGB value should use the bulb's white light mode, otherwise returns False'''
-#     r, g, b = rgb
-#     return r >= R_THRESHOLD and g >= G_THRESHOLD and b >= B_THRESHOLD
 
 def is_black(hsv):
     '''Returns True if the HSV value should turn the bulb off, otherwise returns False'''
     _, _, v = hsv
     return v <= BLACK_VALUE_THRESHOLD
-
-# def is_black_rgb(rgb):
-#     '''Returns True if the RGB value should turn the bulb off, otherwise returns False'''
-#     r, g, b = rgb
-#     return r <= R_THRESHOLD and g <= G_THRESHOLD and b <= B_THRESHOLD
