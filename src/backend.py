@@ -1,6 +1,10 @@
 from src.colors import bgr_to_hsv, has_significant_color_change, is_white, is_black
 from src.bulb import set_color, set_power, set_white
 from src.smoothing import smooth_color
+from src.bulb.worker import start as start_worker
+from src.bulb.worker import stop as stop_worker
+from src.bulb.worker import set_state
+import time
 
 target_color = None
 output_color = None
@@ -18,6 +22,8 @@ def start():
     print("Starting Swift Immerse...")
     power_success = set_power(True)
     print("Power success:", power_success)
+
+    start_worker()
 
 def process_frame(average_color):
     '''Process a single frame of the screen capture.'''
@@ -38,20 +44,39 @@ def process_frame(average_color):
 
     if is_white(current_color):
         if current_mode != "white":
-            set_white(v)  # Set brightness
+
+            start = time.perf_counter()
+            set_state("white", v)  # Set brightness
+            elapsed = time.perf_counter() - start
+            print(f"{elapsed}s")
+            
             current_mode = "white"
 
     elif is_black(current_color):
-            set_color(0, 0, 0)  # Set to black
-            current_mode = "color"
+            if current_mode != "black":
+
+                start = time.perf_counter()
+                set_state("color", (0, 0, 0))  # Set to black
+                elapsed = time.perf_counter() - start
+                print(f"{elapsed}s")
+                current_mode = "black"
 
     else:
-        set_color(h, s, v)
-        current_mode = "color"
+        if current_mode != "color":
+
+            start = time.perf_counter()
+            set_state("color", (h, s, v))
+            elapsed = time.perf_counter() - start
+            print(f"{elapsed}s")
+            current_mode = "color"
+        else:
+            set_state("color", (h, s, v))
 
 def stop():
     '''Stop the Swift Immerse program.'''
     print("\nStopping Swift Immerse...")
+
+    stop_worker()
 
     print("Turning off bulb...")
     power_success = set_power(False)

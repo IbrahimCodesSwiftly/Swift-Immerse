@@ -19,7 +19,6 @@ bulb.set_socketTimeout(0.5)
 bulb.detect_bulb(nowait=False)
 
 
-
 # colors = [
 #     (0, 1000, 1000),
 #     (120, 1000, 1000),
@@ -28,35 +27,101 @@ bulb.detect_bulb(nowait=False)
 
 set_power(True)
 
-set_power(True)
+def timed(name, function, *args):
+    start = time.perf_counter()
 
-print("WHITE")
-set_white(500)
+    response = function(*args)
 
-time.sleep(2)
+    elapsed = time.perf_counter() - start
 
-print("BLACK")
-set_color(0, 0, 0)
+    print(f"{name}: {elapsed:.3f}s | Response: {response}")
 
-time.sleep(2)
 
-print("WHITE")
-set_white(500)
+timed("WHITE", set_white, 500)
 
 time.sleep(2)
 
-print("BLACK")
-set_color(0, 0, 0)
+timed("RED", set_color, 0, 1000, 1000)
 
 time.sleep(2)
 
-print("COLOR")
-set_color(0, 1000, 1000)
+timed("GREEN", set_color, 120, 1000, 1000)
 
 time.sleep(2)
 
-print("BLACK")
-set_color(0, 0, 0)
+timed("BLUE", set_color, 240, 1000, 1000)
+
+# print("1. WHITE")
+# response = set_white(500)
+# print("White response:", response)
+
+# time.sleep(3)
+
+# print("2. RED")
+# response = set_color(0, 1000, 1000)
+# print("Red response:", response)
+
+# time.sleep(3)
+
+# print("3. GREEN")
+# response = set_color(120, 1000, 1000)
+# print("Green response:", response)
+
+# time.sleep(3)
+
+# print("4. BLUE")
+# response = set_color(240, 1000, 1000)
+# print("Blue response:", response)
+
+# print("WHITE")
+# set_white(500)
+
+# time.sleep(5)
+
+# print("RED")
+# set_color(0, 1000, 1000)
+
+# time.sleep(5)
+
+# print("WHITE")
+# set_white(500)
+
+# time.sleep(5)
+
+# print("BLUE")
+# set_color(240, 1000, 1000)
+
+# time.sleep(2)
+
+# print("Done.")
+
+# print("WHITE")
+# set_white(500)
+
+# time.sleep(2)
+
+# print("BLACK")
+# set_color(0, 0, 0)
+
+# time.sleep(2)
+
+# print("WHITE")
+# set_white(500)
+
+# time.sleep(2)
+
+# print("BLACK")
+# set_color(0, 0, 0)
+
+# time.sleep(2)
+
+# print("COLOR")
+# set_color(0, 1000, 1000)
+
+# time.sleep(2)
+
+# print("BLACK")
+# set_color(0, 0, 0)
 
 # for i in range(100):
 #     color = colors[i % 3]
