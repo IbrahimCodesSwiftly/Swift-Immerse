@@ -21,7 +21,12 @@ def start():
 
     print("Starting Swift Immerse...")
     power_success = set_power(True)
+
     print("Power success:", power_success)
+
+    if not power_success:
+        print("Could not connect to bulb. Worker will not start.")
+        return
 
     start_worker()
 
