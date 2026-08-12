@@ -77,13 +77,18 @@ def _run():
 
         mode, value = state
 
-        print(f"WORKER sending: {mode} {value}")
+
+        #send_start = time.perf_counter()
 
         if mode == "color":
             set_color(*value)
 
         elif mode == "white":
             set_white(value)
+
+        #send_time = time.perf_counter() - send_start
+
+        #print(f"WORKER send time: {send_time:.3f}s")
 
         _last_sent_state = state
 

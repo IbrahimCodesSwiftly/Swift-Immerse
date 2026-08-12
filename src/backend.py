@@ -44,30 +44,20 @@ def process_frame(average_color):
 
     if is_white(current_color):
         if current_mode != "white":
-
-            start = time.perf_counter()
             set_state("white", v)  # Set brightness
-            elapsed = time.perf_counter() - start
-            print(f"{elapsed}s")
             
             current_mode = "white"
 
     elif is_black(current_color):
             if current_mode != "black":
-
-                start = time.perf_counter()
                 set_state("color", (0, 0, 0))  # Set to black
-                elapsed = time.perf_counter() - start
-                print(f"{elapsed}s")
+
                 current_mode = "black"
 
     else:
         if current_mode != "color":
-
-            start = time.perf_counter()
             set_state("color", (h, s, v))
-            elapsed = time.perf_counter() - start
-            print(f"{elapsed}s")
+            
             current_mode = "color"
         else:
             set_state("color", (h, s, v))
