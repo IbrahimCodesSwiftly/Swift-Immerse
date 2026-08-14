@@ -1,7 +1,17 @@
 from config.config import config
 from src.screen import capture_screen, get_average_color
 from src.backend import start, process_frame, stop
+from src.instance_lock import SingleInstance
 import time
+
+
+instance = SingleInstance()
+
+if not instance.acquire():
+    print("Swift Immerse is already running.")
+    raise SystemExit(1)
+
+# existing Swift Immerse startup...
 
 
 fps = config["capture"]["fps"]
@@ -25,4 +35,7 @@ except KeyboardInterrupt:
     pass
 
 finally:
-    stop()
+    try:
+        stop()
+    finally:
+        instance.release()
