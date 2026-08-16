@@ -2,23 +2,32 @@ import cv2
 import numpy as np
 import mss
 
+sct = mss.mss()
+monitor = sct.monitors[1]
+
+
 def capture_screen():
     '''Capture the screen and return the frame.'''
-    with mss.mss() as sct:
-        monitor = sct.monitors[1]  # Primary monitor
 
-        while True:
-            screenshot = sct.grab(monitor)
+    screenshot = sct.grab(monitor)
 
-            frame = np.array(screenshot)
+    frame = np.asarray(screenshot)
 
-            # Convert BGRA to BGR
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+    # BGRA to BGR
+    frame = frame[:, :, :3]
 
-            return frame
+    frame = cv2.resize(
+        frame,
+        (640, 360),
+        interpolation=cv2.INTER_AREA
+    )
+
+    return frame
+
 
 def get_average_color(frame):
     '''Get the average color of the frame.'''
+
     average_color = frame.mean(axis=(0, 1)).astype(int)
 
     return average_color
