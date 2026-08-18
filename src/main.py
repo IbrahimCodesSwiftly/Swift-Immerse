@@ -3,6 +3,11 @@ from src.screen import capture_screen, get_average_color
 from src.backend import start, process_frame, stop
 from src.instance_lock import SingleInstance
 import time
+import os  #temp ram check
+import psutil  #temp ram check
+
+_process = psutil.Process(os.getpid())     #temp ram check
+_last_memory_check = time.perf_counter()  #temp ram check
 
 
 instance = SingleInstance()
@@ -28,6 +33,11 @@ try:
         average_color = get_average_color(frame)
 
         process_frame(average_color)
+
+        if time.perf_counter() - _last_memory_check >= 5:   #temp ram check
+            memory_mb = _process.memory_info().rss / (1024 * 1024)  #temp ram check
+            print(f"SI RAM: {memory_mb:.1f} MB")    #temp ram check
+            _last_memory_check = time.perf_counter()    #temp ram check
 
         time.sleep(frame_interval)
 
