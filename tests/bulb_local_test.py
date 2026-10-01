@@ -1,23 +1,7 @@
 import tinytuya
 import time
-from src.bulb.bulb_local import set_color, set_power, set_white
+from src.bulb.bulb_local import set_color, set_power, set_white, test_reconnect
 from config.config import config
-
-DEVICE_ID = config["tuya"]["DEVICE_ID"]
-IP = config["tuya"]["IP"]
-LOCAL_KEY = config["tuya"]["LOCAL_KEY"]
-
-bulb = tinytuya.BulbDevice(
-    DEVICE_ID,
-    IP,
-    LOCAL_KEY,
-)
-
-bulb.set_version(3.5)
-bulb.set_socketPersistent(True)
-bulb.set_socketTimeout(0.5)
-bulb.detect_bulb(nowait=False)
-
 
 # colors = [
 #     (0, 1000, 1000),
@@ -25,31 +9,45 @@ bulb.detect_bulb(nowait=False)
 #     (240, 1000, 1000)
 # ]
 
-set_power(True)
+# set_power(True)
 
-def timed(name, function, *args):
-    start = time.perf_counter()
+print("Starting reconnect test...")
 
-    response = function(*args)
+test_reconnect()
 
-    elapsed = time.perf_counter() - start
+print("Sending RED...")
+set_color(0, 1000, 1000)
+time.sleep(1)
 
-    print(f"{name}: {elapsed:.3f}s | Response: {response}")
+print("Sending BLUE...")
+set_color(240, 1000, 1000)
+time.sleep(1)
+
+print("Done.")
+
+# def timed(name, function, *args):
+#     start = time.perf_counter()
+
+#     response = function(*args)
+
+#     elapsed = time.perf_counter() - start
+
+#     print(f"{name}: {elapsed:.3f}s | Response: {response}")
 
 
-timed("WHITE", set_white, 500)
+# timed("WHITE", set_white, 500)
 
-time.sleep(2)
+# time.sleep(2)
 
-timed("RED", set_color, 0, 1000, 1000)
+# timed("RED", set_color, 0, 1000, 1000)
 
-time.sleep(2)
+# time.sleep(2)
 
-timed("GREEN", set_color, 120, 1000, 1000)
+# timed("GREEN", set_color, 120, 1000, 1000)
 
-time.sleep(2)
+# time.sleep(2)
 
-timed("BLUE", set_color, 240, 1000, 1000)
+# timed("BLUE", set_color, 240, 1000, 1000)
 
 # print("1. WHITE")
 # response = set_white(500)
@@ -128,6 +126,11 @@ timed("BLUE", set_color, 240, 1000, 1000)
 
 #     print(f"{i + 1}/100 -> {color}")
 #     set_color(*color)
+
+#     start = time.perf_counter()
+
+#     elapsed = time.perf_counter() - start
+#     print(f"{i:02d}: {elapsed:.4f}s")
 
 #     time.sleep(1 / 30)
 
