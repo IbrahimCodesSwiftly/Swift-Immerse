@@ -10,6 +10,10 @@ V_THRESHOLD = config["hsv"]["v_threshold"]     # out of 1000
 #WHITE/BLACK Detection Thresholds
 WHITE_SATURATION_THRESHOLD = 40     # out of 1000
 WHITE_VALUE_THRESHOLD = 500         # out of 1000(temperature)
+# Use a wider exit threshold so small capture fluctuations do not keep
+# switching the bulb between white and colour modes.
+WHITE_SATURATION_EXIT_THRESHOLD = 60
+WHITE_VALUE_EXIT_THRESHOLD = 450
 BLACK_VALUE_THRESHOLD = 30         # out of 1000
 
 
@@ -38,10 +42,22 @@ def has_significant_color_change(current_color, target_color):
     return h_diff >= H_THRESHOLD or s_diff >= S_THRESHOLD or v_diff >= V_THRESHOLD
 
 
-def is_white(hsv):
+def is_white(hsv, currently_white=False):
     '''Returns True if the HSV value should use the bulb's white light mode, otherwise returns False'''
     _, s, v = hsv
-    return s <= WHITE_SATURATION_THRESHOLD and v >= WHITE_VALUE_THRESHOLD
+
+    saturation_threshold = (
+        WHITE_SATURATION_EXIT_THRESHOLD
+        if currently_white
+        else WHITE_SATURATION_THRESHOLD
+    )
+    value_threshold = (
+        WHITE_VALUE_EXIT_THRESHOLD
+        if currently_white
+        else WHITE_VALUE_THRESHOLD
+    )
+
+    return s <= saturation_threshold and v >= value_threshold
 
 
 def is_black(hsv):

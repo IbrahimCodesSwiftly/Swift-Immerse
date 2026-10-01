@@ -10,7 +10,7 @@ _CAPTURE_HEIGHT = 360
 
 
 def capture_screen():
-    """Capture and downscale the primary screen."""
+    '''Capture and downscale the primary screen.'''
 
     screenshot = _sct.grab(_monitor)
 

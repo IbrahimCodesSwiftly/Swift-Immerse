@@ -3,7 +3,7 @@ from config.config import config
 LERP_FACTOR = config["smoothing"]["factor"]  # Smoothing factor for linear interpolation
 
 def smooth_color(current_color, target_color):
-    """Smoothly transition from the current color to the target color."""
+    '''Smoothly transition from the current color to the target color.'''
     current_h, current_s, current_v = current_color
     target_h, target_s, target_v = target_color
 
