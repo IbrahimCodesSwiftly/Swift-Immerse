@@ -27,3 +27,6 @@ tinytuya/
 
 # Logs
 logs/*.log
+
+#Desktop files
+desktop.ini
