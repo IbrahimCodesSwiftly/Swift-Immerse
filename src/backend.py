@@ -1,10 +1,9 @@
 from src.colors import bgr_to_hsv, has_significant_color_change, is_white, is_black
-from src.bulb import set_color, set_power, set_white
+from src.bulb import set_power
 from src.smoothing import smooth_color
 from src.bulb.worker import start as start_worker
 from src.bulb.worker import stop as stop_worker
 from src.bulb.worker import set_state
-import time
 
 target_color = None
 output_color = None
@@ -47,22 +46,19 @@ def process_frame(average_color):
     output_color = smooth_color(output_color, target_color)
     h, s, v = output_color
 
-    if is_white(current_color):
+    if is_white(current_color, currently_white=(current_mode == "white")):
         if current_mode != "white":
             set_state("white", v)  # Set brightness
-            
             current_mode = "white"
 
     elif is_black(current_color):
             if current_mode != "black":
                 set_state("color", (0, 0, 0))  # Set to black
-
                 current_mode = "black"
 
     else:
         if current_mode != "color":
             set_state("color", (h, s, v))
-            
             current_mode = "color"
         else:
             set_state("color", (h, s, v))
