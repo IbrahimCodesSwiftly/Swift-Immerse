@@ -34,10 +34,10 @@ try:
 
         process_frame(average_color)
 
-        if time.perf_counter() - _last_memory_check >= 5:   #temp ram check
-            memory_mb = _process.memory_info().rss / (1024 * 1024)  #temp ram check
-            print(f"SI RAM: {memory_mb:.1f} MB")    #temp ram check
-            _last_memory_check = time.perf_counter()    #temp ram check
+        # if time.perf_counter() - _last_memory_check >= 5:   #temp ram check
+        #     memory_mb = _process.memory_info().rss / (1024 * 1024)  #temp ram check
+        #     print(f"SI RAM: {memory_mb:.1f} MB")    #temp ram check
+        #     _last_memory_check = time.perf_counter()    #temp ram check
 
         time.sleep(frame_interval)
 
