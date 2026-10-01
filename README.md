@@ -48,6 +48,8 @@ Open the source code and replace the Tuya credentials with your own:
 - Access ID
 - Access Secret
 - Device ID
+- IP
+- Local Key
 
 ## Run
 
