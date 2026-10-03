@@ -8,7 +8,8 @@
         "LOCAL_KEY": ""
     },
 
-    "mode": "local",
+    "bulb_mode": "local",
+    "mode": "full_screen",
 
     "capture": {
         "fps": 20

@@ -1,5 +1,6 @@
 from config.config import config
-from src.screen import capture_screen, get_average_color
+from src.screen import capture_screen
+from src.modes import process
 from src.backend import start, process_frame, stop
 from src.instance_lock import SingleInstance
 import time
@@ -30,9 +31,9 @@ try:
 
     while True:
         frame = capture_screen()
-        average_color = get_average_color(frame)
+        color = process(frame)
 
-        process_frame(average_color)
+        process_frame(color)
 
         # if time.perf_counter() - _last_memory_check >= 5:   #temp ram check
         #     memory_mb = _process.memory_info().rss / (1024 * 1024)  #temp ram check

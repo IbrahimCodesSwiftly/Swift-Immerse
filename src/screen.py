@@ -26,11 +26,3 @@ def capture_screen():
     frame = frame[:, :, :3]
 
     return frame
-
-
-def get_average_color(frame):
-    '''Get the average color of the frame.'''
-
-    average_color = frame.mean(axis=(0, 1)).astype(int)
-
-    return average_color
