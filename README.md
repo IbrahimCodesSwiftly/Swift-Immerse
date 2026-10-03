@@ -6,7 +6,8 @@ The project is under active development; setup and behavior may change.
 
 ## Features
 
-- Captures and downsizes the primary display to 640 × 360 before calculating its average color.
+- Captures and downsizes the primary display to 640 × 360 for real-time color analysis.
+- Offers multiple lighting modes for different ambient effects.
 - Sends color updates to a compatible bulb.
 - Detects white and black screen content and switches the bulb mode accordingly.
 - Smooths color changes using a configurable interpolation factor.
